@@ -1,0 +1,33 @@
+<snippet>
+	<content>
+<![CDATA[
+select
+  @select:a.name:country_name@,
+  @select:c.currency_code:currency_code@,
+  @select:c.currency_code
+  || ' ('
+  || c.currency_symbol
+  || ')':currency_name,
+  @select:c.last_updated_date:last_updated_date@,
+  @select:lang.language_code:language_code@,
+  @select:lang.id:language_id@
+from
+  cmn_countries b
+join cmn_captions_nls a
+on
+  a.pk_id                  = b.id
+and upper(a.table_name)    = upper('cmn_countries')
+and upper(a.language_code) = upper(@where:param:language@)
+join cmn_currencies c
+on
+  c.id = b.currency_id
+join cmn_languages lang
+on
+  lang.language_code = a.language_code
+where
+  @filter@
+]]>
+	</content>
+	<tabTrigger>ppm_nsql_exe_lookup_sql_dwh</tabTrigger>
+	<description>PPM:NSQL:Exemplo de Lookup dinâmico com colunas do DWH</description>
+</snippet>

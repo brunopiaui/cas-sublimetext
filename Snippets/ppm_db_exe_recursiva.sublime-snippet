@@ -1,0 +1,35 @@
+<snippet>
+	<content>
+<![CDATA[
+select
+  pot.unique_name obs_type_code,
+  pot.name obs_type,
+  replace(obs.path, ':', '/') obs_path
+from
+  prj_obs_associations poa
+join prj_obs_units pou
+on
+  poa.unit_id = pou.id
+join prj_obs_types pot
+on
+  pou.type_id = pot.id
+left join
+  (
+    select
+      pou.type_id,
+      pou.id,
+      sys_connect_by_path(pou.name, ':') path
+    from
+      prj_obs_units pou
+      start with pou.parent_id is null
+      connect by prior pou.id   = pou.parent_id
+  )
+  obs
+on
+  poa.unit_id = obs.id
+and pot.id    = obs.type_id
+]]>
+	</content>
+	<tabTrigger>ppm_db_exe_recursiva</tabTrigger>
+	<description>PPM:DB:Exemplo de query recursiva</description>
+</snippet>

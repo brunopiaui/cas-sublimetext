@@ -1,0 +1,15 @@
+<snippet>
+	<content>
+<![CDATA[
+<?xml version="1.0" encoding="UTF-8" ?>
+<NikuDataBus>
+  <Header action="read" externalSource="NIKU" objectType="contentPack" version="8.0">
+    <args name="no_dependencies" value="true"/>
+  </Header>
+  <ProcessQuery><Filter name="code" criteria="EQUALS">${1:code_do_processo}</Filter></ProcessQuery>
+</NikuDataBus>
+]]>
+	</content>
+	<tabTrigger>ppm_xog_r_processo</tabTrigger>
+	<description>PPM:XOG:XOG para extração de Processos</description>
+</snippet>

@@ -1,0 +1,5 @@
+[
+  { "keys": ["ctrl+s", "ctrl+d"], "command": "cas_sql_xog_format_date" },
+  { "keys": ["ctrl+s", "ctrl+u"], "command": "cas_sql_upper" },
+  { "keys": ["ctrl+s", "ctrl+l"], "command": "cas_sql_lower" },
+]

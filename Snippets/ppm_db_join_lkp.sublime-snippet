@@ -1,0 +1,14 @@
+<snippet>
+	<content>
+<![CDATA[
+left join
+  cmn_lookups_v lkp
+on
+  lkp.lookup_code            = ${2:tab.coluna}
+and upper(lkp.lookup_type)   = upper('${1:code_do_lookup}')
+and upper(lkp.language_code) = upper('pt')
+]]>
+	</content>
+	<tabTrigger>ppm_db_join_lkp</tabTrigger>
+	<description>PPM:DB:Join de lookup</description>
+</snippet>

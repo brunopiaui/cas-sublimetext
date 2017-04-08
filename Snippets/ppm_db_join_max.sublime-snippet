@@ -1,0 +1,22 @@
+<snippet>
+	<content>
+<![CDATA[
+left join
+  (
+    select
+      tab2.odf_parent_id,
+      tab2.col1,
+      tab2.col2,
+      row_number() over (partition by tab2.odf_parent_id order by tab2.created_date desc) rnum
+    from
+      tabela tab2
+  )
+  tab2
+on
+  tab2.odf_parent_id = tab.id
+and tab2.rnum        = 1
+]]>  
+    </content>
+  <tabTrigger>ppm_db_join_max</tabTrigger>
+  <description>PPM:DB:Join p/ retorna o registro mais recente (MAX)</description>
+</snippet>

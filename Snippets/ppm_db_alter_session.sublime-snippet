@@ -1,0 +1,9 @@
+<snippet>
+	<content>
+<![CDATA[
+alter session set current_schema = ${1:schema}
+]]>
+	</content>
+	<tabTrigger>ppm_db_alter_session</tabTrigger>
+	<description>PPM:DB:Define usuário no banco p/ consultas</description>
+</snippet>

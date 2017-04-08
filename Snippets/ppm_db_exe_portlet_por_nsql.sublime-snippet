@@ -1,0 +1,58 @@
+<snippet>
+	<content>
+<![CDATA[
+select distinct
+  nls_ptl.name nome_portlet,
+  ptl.portlet_code id_portlet,
+  nls_qry.name nome_query,
+  qry.query_code id_query
+from
+  cmn_nsql_queries nsql
+left join cmn_gg_nsql_queries qry
+on
+  nsql.id = qry.cmn_nsql_queries_id
+left join cmn_captions_nls nls_qry
+on
+  nls_qry.pk_id                  = qry.id
+and upper(nls_qry.table_name)    = upper('cmn_gg_nsql_queries')
+and upper(nls_qry.language_code) = upper('pt')
+left join
+  (
+    select
+      cg.id,
+      cg.portlet_id,
+      cg.dal_id
+    from
+      cmn_graphs cg
+    where
+      upper(cg.dal_type) = upper('nsql')
+    union all
+    select
+      cg.id,
+      cg.portlet_id,
+      cg.dal_id
+    from
+      cmn_grids cg
+    where
+      upper(cg.dal_type) = upper('nsql')
+  )
+  ptl_type
+on
+  ptl_type.dal_id = nsql.id
+join cmn_portlets ptl
+on
+  ptl_type.portlet_id = ptl.id
+left join cmn_captions_nls nls_ptl
+on
+  nls_ptl.pk_id                  = ptl.id
+and upper(nls_ptl.table_name)    = upper('cmn_portlets')
+and upper(nls_ptl.language_code) = upper('pt')
+where
+  upper(nsql.nsql_text) like upper('%${1:string_consulta}%')
+order by
+  1
+]]>
+	</content>
+	<tabTrigger>ppm_db_exe_portlet_por_nsql</tabTrigger>
+	<description>PPM:DB:Exemplo de query p/ buscar portlet por texto do NSQL</description>
+</snippet>

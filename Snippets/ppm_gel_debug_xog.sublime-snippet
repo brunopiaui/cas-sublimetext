@@ -1,0 +1,11 @@
+<snippet>
+	<content>
+<![CDATA[
+<gel:log level="${1:info|debug|error}">
+  <gel:expr select="\$result"/>
+</gel:log>
+]]>
+	</content>
+	<tabTrigger>ppm_gel_debug_xog</tabTrigger>
+	<description>PPM:GEL:Debug de XOG no log de processo</description>
+</snippet>

@@ -1,0 +1,15 @@
+<snippet>
+	<content>
+<![CDATA[
+<?xml version="1.0" encoding="UTF-8" ?>
+<NikuDataBus>
+  <Header action="read" externalSource="NIKU" objectType="group" version="8.0">
+    <args name="no_dependencies" value="true"/>
+  </Header>
+  <Query><Filter name="code" criteria="OR">${1:code_do_grupo1,code_do_grupo2}</Filter></Query>
+</NikuDataBus>
+]]>
+	</content>
+	<tabTrigger>ppm_xog_r_grupo</tabTrigger>
+	<description>PPM:XOG:XOG para extração de Grupos</description>
+</snippet>

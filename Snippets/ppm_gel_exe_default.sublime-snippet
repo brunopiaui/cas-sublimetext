@@ -1,0 +1,93 @@
+<snippet>
+	<content>
+<![CDATA[
+<gel:script
+  xmlns:core="jelly:core"
+  xmlns:gel="jelly:com.niku.union.gel.GELTagLibrary"
+  xmlns:sql="jelly:sql"
+  xmlns:soap="jelly:com.niku.union.gel.SOAPTagLibrary"
+  xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+  xmlns:xog="http://www.niku.com/xog"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:file="jelly:com.niku.union.gel.FileTagLibrary">
+  <gel:log level="info">Iniciando o script</gel:log>
+  <core:catch var="connFail">
+    <gel:setDataSource dbId="niku" var="niku"/>
+  </core:catch>
+  <core:if test="\$\{connFail != null\}">
+    <gel:out>Sem conexão a uma base de dados</gel:out>
+  </core:if>
+  <core:set var="v_objId" value="\$\{gel_objectInstanceId\}" trim="true"/>
+  <core:catch var="generalFail">
+    <sql:query dataSource="\$\{niku\}" escapeText="false" var="rs_qry">
+      <![CDATA[
+        select code from tabela where id = ?
+      ]]${-1}>
+      <sql:param value="\$\{v_objId\}"/>
+    </sql:query>
+    <core:choose>
+      <core:when test="\$\{rs_qry.getRowCount() > 0\}">
+        <core:set var="qry" value="rs_qry.rows[0]" trim="true"/>
+        <core:set var="user_param" value="auto_xog_user" trim="true"/>
+        <core:new className="com.niku.union.security.DefaultSecurityIdentifier" var="secId1"/>
+        <core:invokeStatic className="com.niku.union.security.UserSessionControllerFactory" method="getInstance" var="userSessionCtrl"/>
+        <core:invoke method="init" on="\$\{userSessionCtrl\}" var="secId3">
+          <core:arg type="java.lang.String" value="\$\{user_param\}"/>
+          <core:arg type="com.niku.union.security.DefaultSecurityIdentifier" value="\$\{secId1\}"/>
+        </core:invoke>
+        <core:set var="sessionID" value="\$\{secId3.getSessionId()\}" trim="true"/>
+        <gel:parse var="xog">
+          <NikuDataBus xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../xsd/nikuxog_customObjectInstance.xsd">
+            <Header action="write" externalSource="NIKU" objectType="customObjectInstance" version="13.1.0.0248"/>
+            <customObjectInstances objectCode="code_objeto">
+              <instance objectCode="code_objeto" instanceCode="\$\{qry.code\}">
+                <CustomInformation>
+                  <ColumnValue name="code_atributo">\$\{qry.coluna_da_query\}</ColumnValue>
+                </CustomInformation>
+              </instance>
+            </customObjectInstances>
+          </NikuDataBus>
+        </gel:parse>
+        <gel:log level="info">Executando o XOG:</gel:log>
+        <gel:log level="debug">
+          <gel:expr select="\$result"/>
+        </gel:log>
+        <soap:invoke endpoint="internal" var="result">
+          <soap:message>
+            <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xog="http://www.niku.com/xog">
+              <soapenv:Header>
+                <xog:Auth>
+                  <xog:SessionID>\$\{sessionID\}</xog:SessionID>
+                </xog:Auth>
+              </soapenv:Header>
+              <soapenv:Body>
+                <gel:include select="\$xog"/>
+              </soapenv:Body>
+            </soapenv:Envelope>
+          </soap:message>
+        </soap:invoke>
+        <gel:set asString="false" select="\$result/soapenv:Envelope/soapenv:Body/NikuDataBus/XOGOutput/Statistics" var="stats"/>
+        <gel:set asString="false" select="\$stats/@failureRecords" var="failureRecords"/>
+        <gel:set asString="false" select="\$stats/@insertedRecords" var="insertedRecords"/>
+        <gel:set asString="false" select="\$stats/@totalNumberOfRecords" var="totalNumberOfRecords"/>
+        <gel:set asString="false" select="\$stats/@updatedRecords" var="updatedRecords"/>
+        <core:if test="\$\{failureRecords == 0\}">
+          <gel:log level="info">XOG executado com sucesso: insertedRecords = \$\{insertedRecords\} / totalNumberOfRecords = \$\{totalNumberOfRecords\} / updatedRecords = \$\{updatedRecords\}</gel:log>
+        </core:if>
+        <core:if test="\$\{failureRecords > 0\}">
+          <gel:log level="error">Erro Invoke: Ocorreu um erro ao tentar executar o XOG</gel:log>
+          <gel:log level="error">Segue o erro: <gel:expr select="\$result"/></gel:log>
+        </core:if>
+      </core:when>
+    </core:choose>
+  </core:catch>
+  <core:if test="\$\{generalFail != null\}">
+    <gel:log level="error">Erro Geral: \$\{generalFail\}</gel:log>
+  </core:if>
+</gel:script>
+]]>
+  </content>
+	<tabTrigger>ppm_gel_exe_default</tabTrigger>
+  <description>PPM:GEL:Exemplo padrão de GEL Script</description>
+</snippet>

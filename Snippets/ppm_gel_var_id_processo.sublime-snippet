@@ -1,0 +1,9 @@
+<snippet>
+	<content>
+<![CDATA[
+\$\{gel_processId\}
+]]>
+	</content>
+	<tabTrigger>ppm_gel_var_id_processo</tabTrigger>
+	<description>PPM:GEL:Id do processo ${gel_processId}</description>
+</snippet>

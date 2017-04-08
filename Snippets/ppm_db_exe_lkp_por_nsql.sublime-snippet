@@ -1,0 +1,29 @@
+<snippet>
+	<content>
+<![CDATA[
+select
+  nls_lkp.name nome_portlet,
+  lkp.lookup_type id_portlet,
+  nsql.nsql_text nsql
+from
+  cmn_nsql_queries nsql
+join cmn_list_of_values lkp_list
+on
+  lkp_list.sql_text_id = nsql.id
+join cmn_lookup_types lkp
+on
+  lkp.lookup_type = lkp_list.lookup_type_code
+left join cmn_captions_nls nls_lkp
+on
+  nls_lkp.pk_id                  = lkp.id
+and upper(nls_lkp.table_name)    = upper('cmn_lookup_types')
+and upper(nls_lkp.language_code) = upper('pt')
+where
+  upper(nsql.nsql_text) like upper('%${1:string_consulta}%')
+order by
+  1
+]]>
+	</content>
+	<tabTrigger>ppm_db_exe_lkp_por_nsql</tabTrigger>
+	<description>PPM:DB:Exemplo de query p/ buscar lookup por texto do NSQL</description>
+</snippet>

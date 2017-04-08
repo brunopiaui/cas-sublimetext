@@ -1,0 +1,3 @@
+[
+  { "keys": ["ctrl+x", "ctrl+d"], "command": "cas_xog_format_date" },
+]

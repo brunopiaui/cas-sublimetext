@@ -1,0 +1,51 @@
+<snippet>
+	<content>
+<![CDATA[
+select distinct
+  nls_p.name process_name,
+  p.process_code,
+  nls_step.name step_name,
+  step.step_code,
+  nls_action.name action_name,
+  action.action_code
+from
+  bpm_def_processes p
+join bpm_def_process_versions pv
+on
+  p.id = pv.process_id
+left join cmn_captions_nls nls_p
+on
+  nls_p.pk_id                  = p.id
+and upper(nls_p.table_name)    = upper('bpm_def_processes')
+and upper(nls_p.language_code) = upper('pt')
+join bpm_def_stages stage
+on
+  stage.process_version_id = pv.id
+join bpm_def_steps step
+on
+  step.stage_id = stage.id
+left join cmn_captions_nls nls_step
+on
+  nls_step.pk_id                  = step.id
+and upper(nls_step.table_name)    = upper('bpm_def_steps')
+and upper(nls_step.language_code) = upper('pt')
+join bpm_def_step_actions action
+on
+  action.step_id = step.id
+left join cmn_captions_nls nls_action
+on
+  nls_action.pk_id                  = action.id
+and upper(nls_action.table_name)    = upper('bpm_def_step_actions')
+and upper(nls_action.language_code) = upper('pt')
+join cmn_custom_scripts script
+on
+  script.id = action.script_id
+where
+  upper(script.script_text) like upper('%${1:string_consulta}%')
+order by
+  1
+]]>
+	</content>
+	<tabTrigger>ppm_db_exe_proc_por_script</tabTrigger>
+	<description>PPM:DB:Exemplo de query p/ buscar processo por texto do script</description>
+</snippet>

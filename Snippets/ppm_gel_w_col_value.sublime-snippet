@@ -1,0 +1,9 @@
+<snippet>
+	<content>
+<![CDATA[
+<ColumnValue name="${1:coluna}">\$\{${2:valor}\}</ColumnValue>
+]]>
+	</content>
+	<tabTrigger>ppm_gel_w_col_value</tabTrigger>
+	<description>PPM:GEL:ColumnValue</description>
+</snippet>

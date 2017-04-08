@@ -1,0 +1,20 @@
+<snippet>
+	<content>
+<![CDATA[
+<?xml version="1.0" encoding="UTF-8"?>
+<NikuDataBus xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../xsd/nikuxog_read.xsd">
+  <Header action="read" externalSource="NIKU" objectType="contentPack" version="8.0">
+    <args contentType="object" name="order_by_1" value="code"/>
+    <args name="no_dependencies" value="true"/>
+    <args name="exclude_parent" value="true"/>
+    <args name="noparents" value="true"/>
+  </Header>
+  <ObjectQuery>
+    <Filter criteria="EQUALS" name="object_code">${1:code_objeto}</Filter>
+  </ObjectQuery>
+</NikuDataBus>
+]]>
+  </content>
+	<tabTrigger>ppm_xog_r_objeto_custom</tabTrigger>
+	<description>PPM:XOG:XOG para extração de objetos customizados</description>
+</snippet>

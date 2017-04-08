@@ -1,0 +1,9 @@
+<snippet>
+	<content>
+<![CDATA[
+@where:param:${1:language|user_id|user_name|locale}@
+]]>
+	</content>
+	<tabTrigger>ppm_nsql_param_identifier</tabTrigger>
+	<description>PPM:NSQL:Parâmetro Where:@where:param:language|user_id|user_name|locale@</description>
+</snippet>

@@ -1,0 +1,9 @@
+<snippet>
+	<content>
+<![CDATA[
+\$\{gel_stepActionResultId\}
+]]>
+	</content>
+	<tabTrigger>ppm_gel_var_id_instan_act_etp_proc</tabTrigger>
+	<description>PPM:GEL:Id da ação de etapa de inatância de processo ${gel_stepActionResultId}</description>
+</snippet>

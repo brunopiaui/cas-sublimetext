@@ -1,0 +1,39 @@
+<snippet>
+	<content>
+<![CDATA[
+<gel:script
+  xmlns:core="jelly:core"
+  xmlns:gel="jelly:com.niku.union.gel.GELTagLibrary"
+  xmlns:sql="jelly:sql"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <gel:setDataSource dbId="niku" var="niku"/>
+  <sql:query dataSource="\$\{niku\}" escapeText="false" var="rs_lista">
+    <![CDATA[
+      select 'xxx', col, 0 id from dual
+      union all
+      select 'xxx', col, 1 id from dual
+      union all
+      select 'xxx', col, 2 id from dual
+    ]]${-1}>
+  </sql:query>
+  <core:choose>
+    <core:when test="\$\{rs_lista.getRowCount() > 0\}">
+      <core:forEach items="\$\{rs_lista.rows\}" var="qry_linha">
+        <core:set var="v_col" value="\$\{qry_linha.col\}" trim="true"/>
+        <core:set var="v_id" value="\$\{qry_linha.id\}" trim="true"/>
+        <sql:update dataSource="\$\{niku\}" escapeText="false" var="rs_update">
+          <![CDATA[
+            update tabela tab set tab.col = ? where tab.id = ?
+          ]]${-1}>
+          <sql:param value="\$\{v_col\}"/>
+          <sql:param value="\$\{v_id\}"/>
+        </sql:update>
+      </core:forEach>
+    </core:when>
+  </core:choose>
+</gel:script>
+]]>
+  </content>
+	<tabTrigger>ppm_gel_exe_update</tabTrigger>
+  <description>PPM:GEL:Exemplo de update no banco</description>
+</snippet>

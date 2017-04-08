@@ -1,0 +1,9 @@
+<snippet>
+	<content>
+<![CDATA[
+@select:dim:user_def:implied:${1:alias_portlet}:${2:tab.id}:id@
+]]>
+	</content>
+	<tabTrigger>ppm_nsql_col_id</tabTrigger>
+	<description>PPM:NSQL:Coluna ID @select:dim:user_def:implied:alias_portlet:tab.id:id@</description>
+</snippet>

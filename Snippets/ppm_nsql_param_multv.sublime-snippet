@@ -1,0 +1,9 @@
+<snippet>
+	<content>
+<![CDATA[
+@where:param:user_def:${1:string|integer|date}:${2:tab.col}:${3:id_param_link}@
+]]>
+	</content>
+	<tabTrigger>ppm_nsql_param_multv</tabTrigger>
+	<description>PPM:NSQL:Parâmetro Multiv @where:param:user_def:string:tab.col:id_param_link@</description>
+</snippet>

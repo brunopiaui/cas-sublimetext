@@ -1,0 +1,9 @@
+<snippet>
+	<content>
+<![CDATA[
+@select:dim_prop:user_def:implied:${1:alias_portlet}:${2:tab.col}:col@
+]]>
+	</content>
+	<tabTrigger>ppm_nsql_col_normal</tabTrigger>
+	<description>PPM:NSQL:Coluna padrão @select:dim_prop:user_def:implied:alias_portlet:tab.col:col@</description>
+</snippet>

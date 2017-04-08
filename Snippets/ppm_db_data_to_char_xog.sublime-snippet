@@ -1,0 +1,9 @@
+<snippet>
+	<content>
+<![CDATA[
+to_char(${1:tab.col_data}, 'YYYY-MM-DD"T"HH24:MI:SS')
+]]>
+	</content>
+	<tabTrigger>ppm_db_data_to_char_xog</tabTrigger>
+	<description>PPM:DB:Converte uma coluna de "Data" no formato PPM p/ XOG</description>
+</snippet>

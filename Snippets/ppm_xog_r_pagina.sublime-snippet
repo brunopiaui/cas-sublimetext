@@ -1,0 +1,15 @@
+<snippet>
+	<content>
+<![CDATA[
+<?xml version="1.0" encoding="UTF-8" ?>
+<NikuDataBus>
+  <Header action="read" externalSource="NIKU" objectType="contentPack" version="8.0">
+    <args name="no_dependencies" value="true"/>
+  </Header>
+  <PageQuery><Filter name="code" criteria="EQUALS">${1:code_da_pagina}</Filter></PageQuery>
+</NikuDataBus>
+]]>
+	</content>
+	<tabTrigger>ppm_xog_r_pagina</tabTrigger>
+	<description>PPM:XOG:XOG para extração de Páginas</description>
+</snippet>

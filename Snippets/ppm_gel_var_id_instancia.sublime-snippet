@@ -1,0 +1,9 @@
+<snippet>
+	<content>
+<![CDATA[
+\$\{gel_objectInstanceId\}
+]]>
+	</content>
+	<tabTrigger>ppm_gel_var_id_instancia</tabTrigger>
+	<description>PPM:GEL:Id de inatância de objeto ${gel_objectInstanceId}</description>
+</snippet>

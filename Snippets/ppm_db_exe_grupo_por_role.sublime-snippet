@@ -1,0 +1,27 @@
+<snippet>
+	<content>
+<![CDATA[
+select
+  g.group_name group_name,
+  g.group_code group_code,
+  role.group_name role_name,
+  role.group_code role_code
+from
+  cmn_sec_groups_v g
+left join cmn_sec_group_flat_hiers hie
+on
+  hie.parent_group_id = g.id
+left join cmn_sec_groups_v role
+on
+  hie.group_id                = role.id
+and upper(role.language_code)   = upper('pt')
+and upper(role.group_role_type) = upper('role')
+where 
+  upper(g.language_code)   = upper('pt')
+and upper(g.group_role_type) = upper('group')
+and upper(role.group_code) like upper('%${1:string_consulta}%')
+]]>
+	</content>
+	<tabTrigger>ppm_db_exe_grupo_por_role</tabTrigger>
+	<description>PPM:DB:Exemplo de query p/ buscar grupo por role (Direito de Acesso)</description>
+</snippet>

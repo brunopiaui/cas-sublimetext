@@ -1,0 +1,9 @@
+<snippet>
+	<content>
+<![CDATA[
+@where:param:xml:${1:string|integer|date}:/data/${2:id_param_link}/@value@
+]]>
+	</content>
+	<tabTrigger>ppm_nsql_param_xml</tabTrigger>
+	<description>PPM:NSQL:Parâmetro xml @where:param:xml:string:/data/id_param_link/@value@</description>
+</snippet>

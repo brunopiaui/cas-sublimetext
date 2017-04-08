@@ -1,0 +1,18 @@
+<snippet>
+	<content>
+<![CDATA[
+<core:forEach items="\$\{rs_qry.rows\}" var="qry_linha">
+  <gel:parse var="xog_dinamico">
+    <instance objectCode="code_do_objeto" instanceCode="\$\{qry_linha.code\}">
+      <CustomInformation>
+        <ColumnValue name="code_do_atributo">\$\{qry_linha.col\}</ColumnValue>
+      </CustomInformation>
+    </instance>
+  </gel:parse>
+  <gel:set insert="true" select="$xog_completo/NikuDataBus/customObjectInstances" value="\$\{xog_dinamico\}"/>
+</core:forEach>
+]]>
+  </content>
+	<tabTrigger>ppm_gel_loop_instancia</tabTrigger>
+  <description>PPM:GEL:Loop de instância</description>
+</snippet>

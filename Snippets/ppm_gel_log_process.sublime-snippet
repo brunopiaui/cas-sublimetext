@@ -1,0 +1,9 @@
+<snippet>
+	<content>
+<![CDATA[
+<gel:log level="${1:info|debug|error}">${2:mensagem}</gel:log>
+]]>
+	</content>
+	<tabTrigger>ppm_gel_log_process</tabTrigger>
+	<description>PPM:GEL:Log de processo</description>
+</snippet>

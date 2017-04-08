@@ -1,0 +1,9 @@
+<snippet>
+	<content>
+<![CDATA[
+@where:param:user_def:${1:string|integer|date}:${2:id_param_link}@
+]]>
+	</content>
+	<tabTrigger>ppm_nsql_param_where</tabTrigger>
+	<description>PPM:NSQL:Parâmetro @where:param:user_def:string:id_param_link@</description>
+</snippet>

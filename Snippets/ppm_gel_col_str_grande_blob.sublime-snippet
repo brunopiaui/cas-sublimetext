@@ -1,0 +1,14 @@
+<snippet>
+	<content>
+<![CDATA[
+<core:if test="\$\{ds_qry.col_str_grande != null\}">
+  <core:invoke method="getSubString" on="\$\{ds_qry.col_str_grande\}" var="col_str_grande">
+    <core:arg type="long" value="1"/>
+    <core:arg type="int" value="\$\{ds_qry.col_str_grande.length()\}"/>
+  </core:invoke>
+</core:if>
+]]>
+	</content>
+	<tabTrigger>ppm_gel_col_str_grande_blob</tabTrigger>
+	<description>PPM:GEL:Tratar coluna de string grande (BLOB)</description>
+</snippet>

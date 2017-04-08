@@ -1,0 +1,14 @@
+<snippet>
+	<content>
+<![CDATA[
+left join
+  odf_multi_valued_lookups multv
+on
+  multv.pk_id              = ${1:tab.col_id_da_instancia}
+and upper(multv.object)    = upper('${2:code_do_objeto}')
+and upper(multv.attribute) = upper('${3:code_do_atributo}')
+]]>
+	</content>
+	<tabTrigger>ppm_db_join_lkp_multv</tabTrigger>
+	<description>PPM:DB:Join de lookup multivalorado</description>
+</snippet>

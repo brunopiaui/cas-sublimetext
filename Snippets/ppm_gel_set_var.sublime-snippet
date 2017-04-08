@@ -1,0 +1,9 @@
+<snippet>
+	<content>
+<![CDATA[
+<core:set var="${1:nome_var}" value="${2:conteudo_var}" trim="true"/>
+]]>
+  </content>
+	<tabTrigger>ppm_gel_set_var</tabTrigger>
+  <description>PPM:GEL:Set variável</description>
+</snippet>

@@ -1,0 +1,53 @@
+<snippet>
+	<content>
+<![CDATA[
+select
+  @select:dim:user_def:implied:h:sq.prid:prid@,
+  @select:dim_prop:user_def:implied:h:sq.name:name@,
+  @select:dim_prop:user_def:implied:h:sq.schedule_start:schedule_start@,
+  @select:dim_prop:user_def:implied:h:sq.schedule_finish:schedule_finish@,
+  @select:dim_prop:user_def:implied:h:sq.hg_has_children:hg_has_children@,
+  @select:metric:user_def:implied:sq.actuals:actuals@
+from
+  (
+    select
+      inv.id prid,
+      inv.name,
+      inv.schedule_start,
+      inv.schedule_finish,
+      nvl(round(inv.labor_actsum/3600,2),0) actuals,
+      inv.id hg_has_children
+    from
+      inv_investments inv
+    where
+      upper(inv.odf_object_code)                 = upper('project')
+    and @where:param:user_def:string:hg_row_id@ is null
+    union all
+    select
+      t.prid,
+      t.prname name,
+      t.prstart schedule_start,
+      t.prfinish schedule_finish,
+      nvl(round(sum(a.practsum)/3600,2),0) actuals,
+      null hg_has_children
+    from
+      prtask t
+    left join prassignment a
+    on
+      a.prtaskid = t.prid
+    where
+      t.prprojectid = @where:param:user_def:string:hg_row_id@
+    group by
+      t.prid,
+      t.prname,
+      t.prstart,
+      t.prfinish
+  )
+  sq
+where
+  @filter@
+]]>
+	</content>
+	<tabTrigger>ppm_nsql_exe_hie</tabTrigger>
+	<description>PPM:NSQL:Exemplo de consulta de hierarquia</description>
+</snippet>

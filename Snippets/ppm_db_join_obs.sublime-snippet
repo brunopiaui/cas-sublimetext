@@ -1,0 +1,25 @@
+<snippet>
+	<content>
+<![CDATA[
+select
+  inv.name,
+  nbi_get_obs_flat_path_fct(prj_obs_ass.unit_id)
+from
+  inv_investments inv
+left join prj_obs_associations prj_obs_ass
+on
+  inv.id = prj_obs_ass.record_id
+left join prj_obs_units pobsunit
+on
+  prj_obs_ass.unit_id = pobsunit.id
+left join prj_obs_types pobstype
+on
+  pobsunit.type_id = pobstype.id
+where
+  upper(prj_obs_ass.table_name) = upper('srm_projects')
+and upper(pobstype.unique_name) = upper('${1:code_obs}')
+]]>
+	</content>
+	<tabTrigger>ppm_db_join_obs</tabTrigger>
+	<description>PPM:DB:Join de OBS</description>
+</snippet>
